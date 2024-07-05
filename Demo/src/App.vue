@@ -1,85 +1,79 @@
-<script setup lang="ts">
-import { RouterLink, RouterView } from 'vue-router'
-import HelloWorld from './components/HelloWorld.vue'
+<template>
+  <div class="main-app">
+    <Header/>
+    <div class="container" :class="screenWidth <= 900 ? 'mb-cont' : ''">
+      <div class="left" v-if="screenWidth > 900 && pathName != 'chat'">
+        <TypeTab/>
+      </div>
+      <div class="main-router">
+        <img class="chatBg" src="/@/assets/images/chatBg.png" alt="">
+        <div class="right">
+          <div class="router-content">
+            <router-view></router-view>
+          </div>
+          <InputContent v-if="pathName != 'chat'"/>
+        </div>
+      </div>
+    </div>
+  </div>
+</template>
+<script>
 </script>
 
-<template>
-  <header>
-    <img alt="Vue logo" class="logo" src="@/assets/logo.svg" width="125" height="125" />
-
-    <div class="wrapper">
-      <HelloWorld msg="You did it!" />
-
-      <nav>
-        <RouterLink to="/">Home</RouterLink>
-        <RouterLink to="/about">About</RouterLink>
-      </nav>
-    </div>
-  </header>
-
-  <RouterView />
-</template>
-
-<style scoped>
-header {
-  line-height: 1.5;
-  max-height: 100vh;
-}
-
-.logo {
-  display: block;
-  margin: 0 auto 2rem;
-}
-
-nav {
+<style scoped lang="scss">
+.main-app {
   width: 100%;
-  font-size: 12px;
-  text-align: center;
-  margin-top: 2rem;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  font-size: 14px;
+  background: #0A0600;
 }
 
-nav a.router-link-exact-active {
-  color: var(--color-text);
-}
+.container {
+  height: calc(100% - 1.48rem);
+  display: flex;
+  padding: .4rem 0 .4rem 0rem;
+  background: url(/@/assets/images/maxBg.svg) no-repeat;
+  background-size: cover;
+  padding-top: .1rem;
 
-nav a.router-link-exact-active:hover {
-  background-color: transparent;
-}
-
-nav a {
-  display: inline-block;
-  padding: 0 1rem;
-  border-left: 1px solid var(--color-border);
-}
-
-nav a:first-of-type {
-  border: 0;
-}
-
-@media (min-width: 1024px) {
-  header {
-    display: flex;
-    place-items: center;
-    padding-right: calc(var(--section-gap) / 2);
+  &.mb-cont {
+    padding: 0;
+    height: 100%;
   }
 
-  .logo {
-    margin: 0 2rem 0 0;
+  .left {
+    width: 300px;
+    padding-top: .3rem;
+    padding-left: 0.4rem;
   }
 
-  header .wrapper {
-    display: flex;
-    place-items: flex-start;
-    flex-wrap: wrap;
-  }
+  .main-router {
+    flex: 1;
+    padding-top: .1rem;
+    position: relative;
 
-  nav {
-    text-align: left;
-    margin-left: -1rem;
-    font-size: 1rem;
+    .chatBg {
+      width: 100%;
+      height: 100%;
+    }
 
-    padding: 1rem 0;
-    margin-top: 1rem;
+    .right {
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+      width: 100%;
+      height: 100%;
+      position: absolute;
+      top: 0px;
+    }
+
+    .router-content {
+      flex: 1;
+      overflow: hidden;
+      position: relative;
+    }
   }
 }
 </style>

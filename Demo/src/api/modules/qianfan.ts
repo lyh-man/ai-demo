@@ -1,15 +1,19 @@
-import http from '@/api/request'
+import http from '/@/api/request'
+
+const urlPrefix = '/qianfan'
+const appId = import.meta.env.VITE_APP_ID_QIAN_FAN
+const appToken = import.meta.env.VITE_APP_TOKEN_QIAN_FAN
 
 export const conversation =  async (data) => {
     return await http({
-        url: '/app/conversation',
+        url: urlPrefix + '/app/conversation',
         method: 'post',
         data: {
-            'app_id': 'b8047ab5-8d8e-4e91-b541-f8564d72d408',
+            'app_id': appId,
         },
         headers: {
             'Content-Type': 'application/json; charset=utf-8',
-            'Authorization': 'Bearer ' + 'bce-v3/ALTAK-q9B9IrqqAtodXSNoofgkk/e5496860749c31f093166f8e8f3a26ecde405807'
+            'Authorization': 'Bearer ' + appToken
         }
     })
 }
